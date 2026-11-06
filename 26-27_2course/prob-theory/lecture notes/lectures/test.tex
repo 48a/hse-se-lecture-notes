@@ -1,0 +1,199 @@
+\section{Информация о курсе} 
+\subsection{Оценка} 
+
+Формула итоговой оценки за курс:
+\[ 
+\begin{aligned}
+\text{О} ={} & 0.15 \cdot \text{ДЗ} + 0.1 \cdot \text{Quiz} + 0.15 \cdot \text{Контест} + {} \\
+& 0.2 \cdot \text{КР (БЛОК)} + 0.25 \cdot \text{Коллок (БЛОК)} + {} \\
+& 0.05 \cdot \text{Бонус от семинариста} + 0.2 \cdot \text{Коллок по доп.\ материалу} 
+\end{aligned}
+\]
+
+\section{Введение}
+
+\begin{definition}[Случайный эксперимент]
+    \textbf{Случайный эксперимент} --- это процесс, наблюдение или действие, результат которого невозможно точно предсказать заранее (до его проведения). 
+    
+    Чтобы эксперимент можно было изучать методами теории вероятностей, он должен обладать следующими свойствами:
+    \begin{itemize}
+        \item \textbf{Отсутствие детерминированной регулярности:} при многократном повторении эксперимента в неизменных условиях результаты могут различаться (исход единичного опыта случаен).
+        \item \textbf{Воспроизводимость эксперимента:} эксперимент теоретически или практически можно повторить бесконечное число раз в одних и тех же контролируемых условиях. Его проведение и исход не должны быть завязаны на уникальные свойства или волю конкретной личности.
+        \item \textbf{Статистическая устойчивость:} при очень большом числе повторений частота появления того или иного исхода стабилизируется и стремится к фиксированному числу (вероятности).
+        \[
+        \frac{N_{1, N}}{N_1} \approx \frac{N_{2, N}}{N_2} \approx \ldots \approx \frac{N_{k, N}}{N_k}
+        \]
+    \end{itemize}
+\end{definition}
+
+Сопоставим каждому результату эксперимента свою $\omega$ --- \textbf{элементарный исход}. Множество всех элементарных исходов обозначается как $\Omega$:
+\[
+    \Omega = \{\omega\} 
+\]
+
+\begin{example}[Пример: Бросок двух игральных костей]
+    Кидаются 2 кости, нас интересует сумма. Варианты выбора пространства $\Omega$:
+    \begin{enumerate}[label=\arabic*)]
+        \item $\omega \in \{2, \dots, 12\}, \quad |\Omega| = 11$
+        \item $\omega = (i_1, i_2), \quad i_j \in \{1, \dots, 6\}, \quad |\Omega| = 36$
+        \item $\omega = \{i_1, i_2\}, \quad |\Omega| = \frac{36-6}{2} + 6 = 21$
+    \end{enumerate}
+\end{example}
+
+\subsection{События}
+
+\begin{definition}[Случайное событие]
+    \textbf{Случайное событие} --- это подмножество пространства элементарных исходов: $\mathcal{A} \subset \Omega$.
+\end{definition}
+
+\begin{definition}[Вероятность]
+    \textbf{Вероятность} события $\mathcal{A}$ --- это предел относительной частоты его появления при стремлении числа экспериментов к бесконечности:
+    \[
+        \frac{N_{\mathcal{A}}}{N} \xrightarrow[N \to \infty]{} \Pr(\mathcal{A})
+    \]
+\end{definition}
+
+\subsection{Математические модели}
+
+Любая математическая модель в теории вероятностей состоит из трех объектов: $(\Omega, \mathcal{F}, \Pr)$, где: 
+\begin{itemize}
+    \item $\Omega$ --- пространство элементарных исходов;
+    \item $\mathcal{F}$ --- множество событий, такое что $\mathcal{F} \subset 2^{\Omega}$ ($\sigma$-алгебра);
+    \item $\Pr$ --- вероятностная мера, задающая функцию $\Pr \colon \mathcal{F} \to [0; 1]$.
+\end{itemize}
+
+\begin{exercise}[О выборе $\mathcal{F}$]
+    Всегда ли $\mathcal{F} = 2^{\Omega}$? Верно ли, что $\Omega \in \mathcal{F}$?
+\end{exercise}
+
+\subsubsection{Свойства вероятностной меры}
+
+\begin{itemize}
+    \item Нормированность: $\Pr(\Omega) = 1$.
+    \item Вероятность невозможного события: $\Pr(\varnothing) = 0$. 
+    \item \textit{(Отсылка к линейности: $\Pr(\varnothing) = 0 \implies f(\alpha \vec{x} + \beta \vec{y}) = \alpha f(\vec{x}) + \beta f(\vec{y})$)}.
+    \item \textbf{Аддитивность:} для несовместных событий (т.е. $\mathcal{A} \cap \mathcal{B} = \varnothing$):
+    \[
+        \Pr(\mathcal{A} \sqcup \mathcal{B}) = \Pr(\mathcal{A}) + \Pr(\mathcal{B}),
+    \]
+    где $\sqcup$ --- дизъюнктивное объединение.
+\end{itemize}
+
+\subsection{Дискретные модели}
+
+Пусть $\Omega$ --- конечное множество. Тогда:
+\[
+    \mathcal{F} = 2^{\Omega} \implies \forall \omega \in \Omega \colon \{\omega\} \in \mathcal{F}, \quad |\mathcal{F}| = 2^{|\Omega|}
+\]
+
+Как задается $\Pr$? Достаточно задать вероятности каждого исхода:
+\[
+    \forall \omega \in \Omega \colon \Pr(\omega)
+\]
+Тогда для любого события $\mathcal{A} \in \mathcal{F}$ ($\mathcal{A} \subset \Omega$) вероятность равна сумме вероятностей входящих в него исходов:
+\[
+    \Pr(\mathcal{A}) = \Sum{\omega \in \mathcal{A}}{} \Pr(\omega)
+\]
+
+\subsubsection{Классические дискретные модели}
+
+\begin{definition}[Классическая модель]
+    \textbf{Классическая модель} --- это дискретная модель, в которой все исходы равновероятны: $\Pr(\omega) = \text{const}$.
+\end{definition}
+
+Найдем эту константу из свойства нормированности:
+\[
+    1 = \Pr(\Omega) = \Pr\l(\bigsqcup^{|\Omega|}_{i = 1} \{\omega_i\}\r) = \Sum{i = 1}{|\Omega|} \Pr(\omega_i) = |\Omega| \cdot \text{const} \implies \text{const} = \frac{1}{|\Omega|}
+\]
+Следовательно, вероятность любого события в классической модели:
+\[
+    \Pr(\mathcal{A}) = \Sum{\omega \in \mathcal{A}}{} \Pr(\omega) = \Sum{\omega \in \mathcal{A}}{} \frac{1}{|\Omega|} = \frac{|\mathcal{A}|}{|\Omega|}
+\]
+
+\begin{example}[Пример: Два кубика в классической модели]
+    \begin{itemize}
+        \item Различимые кубики: $\omega = (i_1, i_2), \quad |\Omega| = 36$.
+        \[
+            \mathcal{F} = 2^{\Omega}, \quad \Pr(\mathcal{A}) = \frac{|\mathcal{A}|}{36}
+        \]
+        \item Неразличимые кубики: $\omega = \{i_1, i_2\}, \quad |\Omega| = 21$.
+        \[
+            \mathcal{F} = 2^{\Omega}, \quad \Pr(\omega) \neq \text{const} \quad \text{(модель перестает быть классической!)}
+        \]
+    \end{itemize}
+\end{example}
+
+\begin{task}[Урновая схема: выбор с возвращением]
+    Есть $N$ шариков: $M$ --- красных (1), $N - M$ --- черных (0). 
+    Вытаскиваем $n$ шариков с возвращением. Какова вероятность вытащить ровно $k$ красных шариков (в любом порядке)?
+\end{task}
+
+\begin{solution}
+    Если мы обозначим элементарный исход как: 
+    \[
+        \omega = (i_1, \dots, i_n), \quad i_j \in \{0, 1\}
+    \]
+    то исходы перестанут быть равновероятными. 
+
+    Рассмотрим элементарный исход как упорядоченный набор вытащенных шариков:
+    \[
+        \omega = (i_1, \dots, i_n), \quad i_j \in \{1, \dots, N\}
+    \]
+    где номера $1, \dots, M$ --- красные, а $M+1, \dots, N$ --- черные шары.
+    
+    Общее число исходов:
+    \[
+        |\Omega| = N^n
+    \]
+    Число благоприятных исходов (выбираем $k$ позиций для красных шаров из $n$ возможных):
+    \[
+        |\mathcal{A}| = C_n^k \cdot M^k \cdot (N - M)^{n - k}
+    \]
+    Вероятность события:
+    \[
+        \Pr(\mathcal{A}) = \frac{|\mathcal{A}|}{|\Omega|} = \frac{C_n^k \cdot M^k \cdot (N - M)^{n-k}}{N^n} = C_n^k \l( \frac{M}{N} \r)^k \l(1 - \frac{M}{N} \r)^{n-k}  
+    \]
+    Если обозначить $p = \frac{M}{N}$, получим классическую формулу Бернулли:
+    \[
+        \Pr(\mathcal{A}) = C_n^k \, p^k (1 - p)^{n-k} 
+    \]
+\end{solution}
+
+\subsubsection{Неклассические дискретные модели}
+
+\begin{definition}[Схема испытаний Бернулли]
+    Обозначается $\mathrm{Bern}(n, p)$, где $n \in \N$ --- число испытаний, $p \in (0; 1)$ --- вероятность успеха. Исход каждого испытания: 0 (неудача) или 1 (успех).
+\end{definition}
+
+Элементарный исход --- вектор результатов:
+\[
+    \omega = (i_1, \dots , i_n), \quad i_j \in \{0, 1\} \implies |\Omega| = 2^n
+\]
+Вероятность конкретного исхода $\omega$ (исходы не равновероятны):
+\[
+    \Pr(\omega) = p^{\Sum{j=1}{n} i_j} \cdot (1 - p)^{n - \Sum{j=1}{n} i_j}
+\]
+
+Проверим нормированность (сумма вероятностей всех исходов равна 1):
+\[
+\begin{aligned}
+    \Sum{\omega \in \Omega}{} \Pr(\omega) &= \Sum{\omega \in \Omega}{} p^{\Sum{j=1}{n} i_j} \cdot (1 - p)^{n - \Sum{j=1}{n} i_j} \\
+    &= \Sum{k = 0}{n} \left( \Sum{\omega \colon \Sum{j = 1}{n} i_j = k}{} p^k (1-p)^{n-k} \right) \\
+    &= \Sum{k = 0}{n} C_n^k \, p^k (1-p)^{n-k} \\
+    &= (p + (1 - p))^n = 1^n = 1
+\end{aligned}
+\]
+
+\subsection{Недискретные модели}
+\subsubsection{Геометрическая вероятность}
+
+Если $\Omega \subset \R^m$ имеет бесконечное (несчетное) число исходов, то вероятности задаются через меру (длину, площадь, объем).
+
+\begin{example}[Геометрическая вероятность на отрезке]
+    Пусть $\Omega = [0; 1]$.
+    Из-за наличия неизмеримых множеств $\mathcal{F} \neq 2^{\Omega}$, поэтому вероятность попадания в измеримое множество $\mathcal{A} \subset \Omega$ определяется как:
+    \[
+        \Pr(\mathcal{A}) = \frac{\lambda(\mathcal{A})}{\lambda(\Omega)} = \lambda(\mathcal{A}),
+    \]
+    где $\lambda(\mathcal{A})$ --- мера Лебега множества $\mathcal{A}$.
+\end{example}
